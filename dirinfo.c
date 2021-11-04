@@ -13,21 +13,15 @@ int main(int argc, char *argv[]) {
     DIR *dir;
     char path[100];
     if((argc == 2) && (dir = opendir(argv[1])) == NULL) {
-        while(dir == NULL) {
-            printf("Error: %s\n", strerror(errno));
-            printf("Please enter a proper path: ");
-            int bytes_read = read(STDIN_FILENO, path, 100);
-            if(path[bytes_read - 1] == '\n') path[bytes_read - 1] = '\0';
-            dir = opendir(path);
-        }
-
-    } else if(argc != 2) {
-        while(dir == NULL) {
-            printf("Please enter a proper path:\n");
-            int bytes_read = read(STDIN_FILENO, path, 100);
-            if(path[bytes_read - 1] == '\n') path[bytes_read - 1] = '\0';
-            dir = opendir(path);
-        }
+        
+        printf("Error: %s\n", strerror(errno));
+    }
+    while(dir == NULL) {
+        printf("Please enter a proper path:\n");
+        int bytes_read = read(STDIN_FILENO, path, 100);
+        if(path[bytes_read - 1] == '\n') path[bytes_read - 1] = '\0';
+        dir = opendir(path);
+	if(dir == NULL) printf("Error: %s\n", strerror(errno));
     }
     struct dirent *entry;
 
