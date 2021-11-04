@@ -8,8 +8,6 @@
 #include <unistd.h>
 
 int main(int argc, char *argv[]) {
-
-
     DIR *dir;
     char path[100];
     if((argc == 2) && (dir = opendir(argv[1])) == NULL) {
